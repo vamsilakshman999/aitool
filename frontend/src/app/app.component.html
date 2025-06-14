@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">Aitool</mat-toolbar>
+<div style="padding:16px">
+  <input type="file" (change)="onFileSelected($event)">
+  <button mat-raised-button color="primary" (click)="upload()" [disabled]="uploading || !selectedFile">Upload</button>
+  <div>
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="S3 URL" [(ngModel)]="urlInput">
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="addUrl()" [disabled]="uploading || !urlInput">Add by URL</button>
+  </div>
+  <mat-progress-bar *ngIf="uploading" mode="indeterminate"></mat-progress-bar>
+  <mat-list>
+    <mat-list-item *ngFor="let f of files">
+      <h4 matLine>{{ f.filename }}</h4>
+      <p matLine>{{ f.summary }}</p>
+    </mat-list-item>
+  </mat-list>
+</div>
