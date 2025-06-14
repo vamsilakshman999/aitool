@@ -1,49 +1,30 @@
-# aitool
+# Aitool
 
-This repository provides a minimal demonstration of a backend written in Spring Boot and a frontend using Node with Jest for testing. The environment lacks internet access, so you must provide dependencies offline.
+This repository provides a minimal full-stack example using **Spring Boot** for the backend and **Angular** for the frontend. The environment does not have internet access, so Maven and npm dependencies must be provided offline.
 
 ## Backend
 
-A simple Spring Boot application lives in the `backend` directory. Copy a Maven distribution to `./maven` and populate `offline-maven-repo` with the required artifacts. Then run:
+The backend project lives in the `backend` directory. Copy a Maven distribution to `./maven` and populate `offline-maven-repo` with the required artifacts. Then run:
 
 ```bash
 ./setup-backend.sh
 ```
 
+This starts a Spring Boot application that exposes REST endpoints for uploading files or referencing remote URLs. Uploaded files are summarized asynchronously (OpenAI integration is left as a TODO).
+
 ## Frontend
 
-The `frontend` directory holds a small Node project with Jest. Place a pre-downloaded `node_modules` directory under `frontend/` or fill it using a local npm cache. Tests can then run with:
+The Angular project resides under `frontend`. Provide a pre-downloaded `node_modules` directory or use a local npm cache so that dependencies resolve offline. Once prepared, you can run the tests or start the dev server:
 
 ```bash
-./setup-frontend.sh
+./setup-frontend.sh    # run Angular unit tests
+cd frontend
+npm start              # launch the development server
 ```
-=======
-# Aitool
 
-This repository contains a minimal example of a full-stack application built with **Spring Boot** and **Angular**. The backend exposes REST endpoints for uploading files or referencing files by S3 URL. Uploaded files are summarized asynchronously using a Retrieval Augmented Generation (RAG) approach (the actual OpenAI integration is left as a TODO). The frontend provides a simple Angular interface to upload files, add remote URLs and display summaries.
+The dev server expects the backend to be running on `localhost:8080`.
 
 ## Structure
 
 - `backend` – Spring Boot application
 - `frontend` – Angular application
-
-## Running Backend
-
-The backend uses Maven. Java 21 is required.
-
-```bash
-cd backend
-mvn spring-boot:run
-```
-
-## Running Frontend
-
-Install dependencies with npm and start the development server:
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-The Angular dev server expects the backend to run on `localhost:8080`.
